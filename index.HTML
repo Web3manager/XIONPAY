@@ -1,0 +1,1312 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XionPay - Crypto Payments Made Simple</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script defer src="https://kit.fontawesome.com/a076d05399.js"></script>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            color:silver;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        a.nav-item.active{
+            color:skyblue;
+        }
+
+        .styled-link{
+            color:silver;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;   
+        }
+
+        .section {
+            display: none;
+            padding: 100px 5% 50px;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(10deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(45deg, #1a1a1a, #0a0a0a);
+            border-radius: 20px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #000;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: linear-gradient( rgba(255, 255, 255, 0.05));
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6e48aa, #9d50bb);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(110, 72, 170, 0.2);
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+            color: #6e48aa;
+        }
+
+        .step p {
+            color: #666;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right,  #6e48aa, #9d50bb);
+            z-index: 0;
+        }
+        .team-section{
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .team-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member{
+            background: #212529;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1) ;
+        }
+
+        .team-photo{
+            width:120px;
+            height:120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid #6c5ce7;
+        }
+
+        /* Add Business Form */
+        .business-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        /* Search Section */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .search-section {
+            margin-bottom: 3rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .business-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .business-card {
+            background:linear-gradient(45deg, #00ff88, #00ccff);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .business-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .business-category {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .business-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .view-site-btn {
+            background: #6366f1;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .view-site-btn:hover {
+            background: #4f46e5;
+        }
+
+        .wallet-address {
+            display: flex;
+            align-items: center;
+            background: #475569;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: whitesmoke;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .wallet-address:hover {
+            background: #4755;
+        }
+
+        .wallet-address i {
+            margin-left: 0.5rem;
+            color: #64748b;
+        }
+
+
+        .load-more {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .load-more-btn {
+            background: #6366f1;
+            color: white;
+            border: 2px solid #6366f1;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .metrics-section {
+            background:linear-gradient(45deg, #00ff88, #00ccff);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+
+        .metrics-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background:#212529;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: purple;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* Hidden class for search functionality */
+        .hidden {
+            display: none;
+        }
+
+        /* Confirmation message */
+        .confirmation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Animations */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+        footer {
+            background-color:#212529;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color:purple;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: #aaa;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: #66e6cc;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+ 
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .step {
+                margin-bottom: 40px;
+            }
+
+            .steps::before {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+/* CSS */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f0f0f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  opacity: 1;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 48px;
+  color: #66e6cc; /* mixed color */
+  font-weight: bold;
+  letter-spacing: 2px;
+  animation: fadeHover 2s ease-in-out infinite;
+}
+
+@keyframes fadeHover {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+ 100% { opacity: 0; }
+}
+
+.progress-bar {
+  width: 200px;
+  height: 8px;
+  background: #333;
+  border-radius: 5px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width 4s linear;
+}
+
+.pay-now-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 25, 0.9);
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.pay-now-spinner {
+  border: 5px solid #eee;
+  border-top: 5px solid #00d1ff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.pay-now-text {
+  font-size: 1rem;
+  color: #00eaff;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+   <!-- Loading Overlay -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <h1 class="loading-text">XIONPAY</h1>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+      <nav class="navbar">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-links"> 
+          <div>
+            <a href="#home" class="nav-item active">Home</a>
+            <a href="#search" class="nav-item">Search Accounts</a>
+            <a href="#about" class="nav-item">About Us</a>
+            <a href="#add-business" class="nav-item">Add Business</a>
+          </div>
+        </div>
+      </nav>
+        
+  <style>
+  
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+  
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+  
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+  
+      .nav-links.open {
+        display: flex;
+      }
+    }
+  </style>
+  
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('open');
+    }
+  </script>
+  
+<!-- Disclaimer Popup -->
+<div id="disclaimer-popup" class="popup-overlay">
+    <div class="popup-box">
+      <h2>Welcome to XIONPAY</h2>
+      <p>
+        Please remember: XIONPAY is a self-custodial service. You're in full control of your funds. 
+        <strong>Blockchain transactions are irreversible</strong>, and interacting with this platform means you accept that responsibility.
+      </p>
+      <label class="checkbox-label">
+        <input type="checkbox" id="disclaimer-check">
+        I understand and trust this site.
+      </label>
+      <button id="agree-btn" disabled>Agree & Enter</button>
+    </div>
+  </div>
+  
+  <style>
+    .popup-overlay {
+      position: fixed;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .popup-box {
+      background-color: #111;
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 20px #00f6ff33;
+    }
+  
+    .popup-box h2 {
+      margin-bottom: 1rem;
+      color: #00f6ff;
+    }
+  
+    .popup-box p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    #agree-btn {
+      background-color: #00f6ff;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+  
+    #agree-btn:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+  </style>
+    
+    <script>
+      window.addEventListener('load', () => {
+        const popup = document.getElementById('disclaimer-popup');
+        const checkbox = document.getElementById('disclaimer-check');
+        const agreeBtn = document.getElementById('agree-btn');
+    
+        checkbox.addEventListener('change', () => {
+          agreeBtn.disabled = !checkbox.checked;
+        });
+    
+        agreeBtn.addEventListener('click', () => {
+          popup.style.display = 'none';
+          localStorage.setItem('xionpayDisclaimerAccepted', 'true');
+        });
+  
+      });
+       // Hook this into the disclaimer "agree" button click
+        window.addEventListener('DOMContentLoaded', () => {
+      const agreeBtn = document.getElementById('agree-btn');
+      if (agreeBtn) {
+        agreeBtn.addEventListener('click', () => {
+          showAdPopup();
+        });
+      }
+    });
+  </script>
+
+<!-- Home Section -->
+<section id="home" class="section active">
+<div class="hero">
+<h1 class="fade-in"> XIONPAY your ZK-crypto Address Service </h1>
+<p class="fade-in delay-1">We bridge the gap between cryptocurrency and everyday commerce, enabling a smooth p2p transaction process.</p>
+<a href="#search" class="nav-item"><button class="cta-button">Get Started</button></a>
+</div>
+</section>
+
+<!-- Ad Popup -->
+<div id="ad-popup" style="display: none;">
+  <div class="ad-content">
+    <img src="ChatGPT Image May 29, 2025, 01_27_04 PM.png" alt="XIONPAY Update" />
+    <button class="close-ad" onclick="closeAd()">×</button>
+  </div>
+</div>
+
+<style>
+    #ad-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}
+
+.ad-content {
+  border: 3px solid;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 90%;
+  width: 480px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.4s ease;
+}
+
+.ad-content img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.close-ad {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7f5af0;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.close-ad:hover {
+  background: #6244d4;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+
+<script>
+    function closeAd() {
+      const adPopup = document.getElementById('ad-popup');
+      if (adPopup) adPopup.style.display = 'none';
+    }
+  
+    function showAdPopup() {
+      setTimeout(() => {
+        const adPopup = document.getElementById('ad-popup');
+        if (adPopup) {
+          adPopup.style.display = 'flex';
+  
+          // Auto-close ad after 6 seconds
+          setTimeout(() => {
+            closeAd();
+          }, 6000);
+        }
+      }, 1000); // 1 seconds after disclaimer is accepted
+    }
+  
+      // Hook this into the disclaimer "agree" button click
+    window.addEventListener('DOMContentLoaded', () => {
+      const agreeBtn = document.getElementById('agree-btn');
+      if (agreeBtn) {
+        agreeBtn.addEventListener('click', () => {
+          showAdPopup();
+        });
+      }
+    });
+  </script>  
+
+<!-- Search Section -->
+<section id="search" class="section">
+    <div class="container">
+        <div class="search-section">
+        <input type="text" class="search-bar fade-in" id="searchBar" placeholder="Search by business name or category...">
+        <div class="business-list fade-in delay-1" id="businessList">
+    <!-- Business cards will be inserted here by JavaScript -->
+    </div>
+    
+    <div class="load-more">
+    <button class="load-more-btn" id="loadMoreBtn">show more</button>
+    </div>
+    </div>
+    
+    <div class="metrics-section">
+    <h2 class="metrics-title">XIONPAY Network Stats</h2>
+    <div class="metrics-grid">
+    <div class="metric-card">
+    <div class="metric-value">+ 500</div>
+    <div class="metric-label">Registered Businesses</div>
+    </div>
+    <div class="metric-card">
+    <div class="metric-value">3,000</div>
+    <div class="metric-label">Total Daily Visit</div>
+    </div>
+    <div class="metric-card">
+    <div class="metric-value">$1,000</div>
+    <div class="metric-label">Total Volume</div>
+    </div>
+    <div class="metric-card">
+    <div class="metric-value"> 5 </div>
+    <div class="metric-label">Supported Regions</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="confirmation" id="confirmation">
+            Wallet address copied to clipboard!
+    </div>
+
+    <div id="payNowLoader" class="pay-now-overlay">
+        <div class="pay-now-spinner"></div>
+        <p class="pay-now-text">Connecting to XION Wallet</p>
+      </div>      
+    
+      <script>
+        // Sample business data
+        const businesses = [
+            { name: "BURNT MARK", category: "⚡ ELECT", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "MICHEAL WILLIAM", category: "🔮 OG", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "BURNT KRATOZ", category: "🟣 SYNDICATE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "XIONCOLLECTIVE", category: "🧠 ARCANE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "UBONGABASI.AE", category: "🟣 SYNDICATE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "Café Crypto", category: "☕ COFFEE SHOP", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "BLOCKCHAIN MALL", category: "🛍️ RETAIL & MALL", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "DIGITAL ART GALLERY", category: "🎨 ART GALLERY", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "TECH HEAVEN", category: "🔗 NODE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "GREEN GROCERS", category: "🛍️ SUPERMARKET", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "WEB3 BOOKSTORE", category: "💻 BOOKSTORE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "NFT FASHION", category: "💎 LUXURY & RARE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "DIGITAL NOMAD HUB", category: "💠 CO-WORKING SPACE", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            { name: "BLOCK EATS", category: "☕ RESTAURANT", wallet: "wallet address are hidden, PAY NOW to proceed", site: "#" },
+            // Add more businesses as needed...
+        ];
+        
+        // Shuffle function using Fisher-Yates algorithm
+        function shuffleArray(array) {
+            const copy = [...array];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+        
+        // DOM elements
+        const businessList = document.getElementById('businessList');
+        const searchBar = document.getElementById('searchBar');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const confirmation = document.getElementById('confirmation');
+        
+        // Variables
+        let visibleBusinesses = 6;
+        let allBusinessesVisible = false;
+        
+        // Display businesses
+        function displayBusinesses(businessesToShow) {
+            businessList.innerHTML = '';
+            businessesToShow.slice(0, visibleBusinesses).forEach(business => {
+                const businessCard = document.createElement('div');
+                businessCard.className = 'business-card';
+                businessCard.innerHTML = `
+                    <div class="business-name">${business.name}</div>
+                    <div class="business-category">${business.category}</div>
+                    <div class="wallet-address" data-wallet="${business.wallet}">
+                        ${business.wallet}
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <div class="business-actions">
+                        <a href="https://settings.burnt.com/" class="view-site-btn">Pay Now</a>
+                    </div>
+                `;
+                businessList.appendChild(businessCard);
+            });
+
+           // Clipboard copy
+  document.querySelectorAll('.wallet-address').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const wallet = el.getAttribute('data-wallet');
+      navigator.clipboard.writeText(wallet).then(() => {
+        confirmation.style.display = 'block';
+        setTimeout(() => {
+          confirmation.style.display = 'none';
+        }, 2000);
+      });
+      e.stopPropagation();
+    });
+  });
+
+  // Pay Now loader
+  document.querySelectorAll('.view-site-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const loader = document.getElementById('payNowLoader');
+      loader.style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = this.href;
+      }, 2000);
+    });
+  });
+}
+
+        // Initialize with shuffled business list
+        const randomizedBusinesses = shuffleArray(businesses);
+        displayBusinesses(randomizedBusinesses);
+        
+        // Search functionality
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm === '') {
+                displayBusinesses(randomizedBusinesses);
+                return;
+            }
+        
+            const filtered = businesses.filter(business =>
+                business.name.toLowerCase().includes(searchTerm) ||
+                business.category.toLowerCase().includes(searchTerm)
+            );
+            displayBusinesses(filtered);
+        });
+        
+        // Load more functionality
+        loadMoreBtn.addEventListener('click', () => {
+            if (allBusinessesVisible) {
+                visibleBusinesses = 6;
+                loadMoreBtn.textContent = 'show more';
+                allBusinessesVisible = false;
+            } else {
+                visibleBusinesses = businesses.length;
+                loadMoreBtn.textContent = 'Show Less';
+                allBusinessesVisible = true;
+            }
+            displayBusinesses(randomizedBusinesses);
+        });
+        </script>                
+</div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+<div class="hero">
+<h1 class="fade-in"> XIONPAY: Driving Crypto Adoption</h1>
+<p class="fade-in delay-1">We're on a  mission to make cryptocurrency payments accessible to everyone, from urban hubs to rural markets.</p>
+</div>
+<div class="features">
+<div class="feature-card">
+<h3 class="fade-in delay-1">Our Vision is to create a borderless financial ecosystem powered by XION's blockchain technology.</h3>
+</div>
+<div class="feature-card">
+<h3 class="fade-in delay-1">Join the Movement and be part of the financial revolution that's changing how the world does business.</h3>
+</div>
+</div>
+<!-- How It Works -->
+<section class="how-it-works">
+    <div class="container">
+    <div class="section-title fade-in">
+    <h2>How XIONPAY Works»</h2>
+    </div>
+    <div class="steps">
+    <div class="step fade-in delay-1">
+    <div class="step-number">1</div>
+    <h3 class="fade-in">Sign-in your Business</h3>
+    <p class="fade-in delay-1">Connect with our lovely clients contact respondent and get started in minutes.</p>
+    </div>
+    <div class="step fade-in delay-2">
+    <div class="step-number">2</div>
+    <h3 class="fade-in">Upload business informations</h3>
+    <p class="fade-in delay-1">we would request your Business name, payment wallet address, and category to set you up instantly.</p>
+    </div>
+    <div class="step fade-in delay-3">
+    <div class="step-number">3</div>
+    <h3 class="fade-in">Get QR code</h3>
+    <p>you would recive a QR code asap to aid a smooth, fast and reliable payment process for your customers.</p>
+    </div>
+    <div class="step fade-in delay-4">
+    <div class="step-number">4</div>
+    <h3 class="fade-in">Start Accepting Payments</h3>
+    <p class="fade-in delay-1">Once uploaded sucessfully, begin receiving crypto payments from customers worldwide.</p>
+    </div>
+    </div>
+    </div>
+    </section>   
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <p>We are the minds behind the future of Crypto payment</p>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="UBONGABASI pfp.jfif" alt="Team Member" class="team-photo">
+                <h3>Ekarika Ubongabasi</h3>
+                <p>Founder & Builder</p></div>
+
+                <div class="team-member">
+                    <img src="xion.png" alt="Team Member" class="team-photo">
+                    <p>JOIN THE TEAM TODAY</p></div>
+
+            <div class="team-member">
+                <img src="josh (6 of 27).png" alt="Team Member" class="team-photo">
+                <h3>Joshua Peter</h3>
+                <p>Designer</p>
+            </div>
+        </div>
+    </section> 
+</section>
+
+<!-- Add Business Section -->
+<section id="add-business" class="section">
+<form class="business-form">
+<h2 class="fade-in">Register Your Business</h2>
+<input type="text" class="form-input fade-in delay-1" placeholder="Business Name" required>
+<textarea class="form-input fade-in delay-1" placeholder="Business Description" rows="4" required></textarea>
+<input type="text" class="form-input fade-in delay-2" placeholder="Business Category" required>
+<input type="text" class="form-input fade-in delay-3" placeholder="Email address" required>
+<input type="text" class="form-input fade-in delay-4" placeholder="XION Wallet address" required>
+<button type="submit" class="cta-button fade-in animation-delay">Submit</button>
+</form>
+</section>
+
+<footer>
+    <div class="container">
+    <div class="footer-content">
+    <div class="footer-column">
+    <h3> XIONPAY </h3>
+    <p>we make cryptocurrency payments accessible to businesses everywhere, bridging the gap between digital currencies and everyday commerce.</p>
+    </div>   
+    <div class="footer-column">
+    <h3>Quick Links</h3>
+    <ul>
+    <li><a href="#home" class="nav-item">Home</a></li>
+    <li><a href="#search" class="nav-item">Search</a></li>
+    <li><a href="#about" class="nav-item">About Us</a></li>
+    <li><a href="#add-business" class="nav-item">Add Business</a></li>
+    </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="https://forms.gle/2C8jTGTGAFL8RUJA9" class="styled-link" target="_blank">Waitlist Now</a></li>
+          <li><a href="https://twitter.com/ubongabasi_ae" class="styled-link" target="_blank">Help Center</a></li>
+          <li><a href="https://docs.burnt.com/xion" class="styled-link" target="_blank">XION Docs</a></li>
+          <li><a href="#communityforum" class="styled-link">Community Forum</a></li>
+        </ul>        
+    </div>
+    <div class="footer-column">
+    <h3>Contact Us</h3>
+    <ul>
+    <li><i class="fas fa-phone"></i> +234 (090) 36858423</li>
+    <li><i class="fas fa-map-marker-alt"></i> XION Nigeria Builder's Ecosystem</li>
+    </ul>
+    <div class="social-links">
+        <a href="https://twitter.com/xionpay"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:daekas2@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="#XION NIGERIA BUILDER'S ECOSYSTEM"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+    </div>
+    </div>
+    <div class="footer-bottom">
+    <p> Built on XION  &copy; 2025 XIONPAY Join the Movement</p>
+    </div>
+    </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }, 3000); // 3 seconds
+    });
+        document.addEventListener('DOMContentLoaded', function () {
+          const sections = document.querySelectorAll('.section');
+          const navItems = document.querySelectorAll('.nav-item');
+      
+          function activateSection(sectionId) {
+            sections.forEach(section => {
+              section.classList.remove('active');
+              if (section.id === sectionId) {
+                section.classList.add('active');
+              }
+            });
+      
+            navItems.forEach(item => {
+              item.classList.remove('active');
+              if (item.getAttribute('href') === `#${sectionId}`) {
+                item.classList.add('active');
+              }
+            });
+          }
+      
+          navItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+              e.preventDefault();
+      
+              const sectionId = this.getAttribute('href').substring(1);
+              activateSection(sectionId);
+      
+              // Smooth scroll to top
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+              // Remove hash from URL to prevent unwanted scroll
+              history.replaceState(null, null, ' ');
+            });
+          });
+      
+          // Activate home section by default
+          activateSection('home');
+        });
+
+  window.addEventListener('load', () => {
+    const fill = document.getElementById('progressFill');
+    const loadingScreen = document.getElementById('loadingScreen');
+
+    // Start progress fill
+    fill.style.width = '100%';
+
+    // Fade out after 5s
+    setTimeout(() => {
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+      }, 500); // Wait for fade transition
+    }, 5000);
+  });
+      </script>            
+</body>
+</html>
