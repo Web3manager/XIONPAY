@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | XIONPAY</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+    .login-wrapper {
+      background: #111;
+      padding: 2rem;
+      border-radius: 14px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 246, 255, 0.1);
+    }
+    .login-wrapper h2 {
+      color: #00f6ff;
+      margin-bottom: 1rem;
+    }
+    input {
+      width: 90%;
+      padding: 0.7rem;
+      margin-top: 1rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.6rem 2rem;
+      background: #00f6ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #00dce5;
+    }
+    .hidden { display: none; }
+
+    .inline-otp {
+      color: #f0f0f0;
+      margin-top: 1rem;
+    }
+    .inline-otp span {
+      color: #00f6ff;
+      font-weight: bold;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0a0a0a;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .progress-bar {
+      background: #333;
+      height: 8px;
+      width: 200px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #00f6ff;
+      transition: width 0.3s ease;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      color: #666;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Email Entry -->
+<div class="login-wrapper" id="emailStage">
+  <h2>Login to XIONPAY</h2>
+  <input type="email" id="userEmail" placeholder="Enter your Gmail" />
+  <button onclick="sendCode()">Continue</button>
+</div>
+
+<!-- OTP Verification -->
+<div class="login-wrapper hidden" id="otpStage">
+  <h2>Verify your HUMAN</h2>
+  <div class="inline-otp">Your OTP is: <span id="generatedCode"></span></div>
+  <input type="text" id="enteredCode" placeholder="Enter the 4-digit code" />
+  <button onclick="verifyCode()">Verify</button>
+</div>
+
+<!-- Loader -->
+<div class="loading-screen" id="loadingScreen">
+  <h1 style="color: #00f6ff; font-size: 2.2rem;">XIONPAY</h1>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<!-- Tagline Footer -->
+<footer>
+  Empowering Peer-to-Peer Crypto Payments Seamlessly utiizing the XION Network.
+</footer>
+
+<script>
+  let code = '';
+
+  function sendCode() {
+    const email = document.getElementById('userEmail').value.trim();
+    if (!email || !email.includes('@gmail.com')) {
+      alert('Please enter a valid Gmail address.');
+      return;
+    }
+
+    code = Math.floor(1000 + Math.random() * 9000).toString();
+    document.getElementById('generatedCode').textContent = code;
+
+    document.getElementById('emailStage').classList.add('hidden');
+    document.getElementById('otpStage').classList.remove('hidden');
+  }
+
+  function verifyCode() {
+    const entered = document.getElementById('enteredCode').value.trim();
+    if (entered === code) {
+      document.getElementById('otpStage').classList.add('hidden');
+      showLoadingScreen();
+    } else {
+      alert('Incorrect passcode. Please try again.');
+    }
+  }
+
+  function showLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const fill = document.getElementById('progressFill');
+    loadingScreen.style.display = 'flex';
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 2;
+      fill.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(interval);
+        window.location.href = 'mainpage.html'; // ✅ Redirect to your actual main site
+      }
+    }, 60);
+  }
+</script>
+
+</body>
+</html>
